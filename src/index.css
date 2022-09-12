@@ -32,6 +32,10 @@ header a {
   margin: 0 auto;
 }
 
+.logo {
+  color: #1b703a;
+}
+
 /* Player table */
 .playerTable {
   min-width: 100%;
@@ -76,5 +80,5 @@ header a {
 .numberPlayersTraining {
   padding: 0 0 0 2rem;
   font-size: 3.5rem;
-  color: #1b703a;
+  color: #60bb87;
 }

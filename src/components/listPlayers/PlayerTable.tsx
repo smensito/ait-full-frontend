@@ -14,10 +14,10 @@ const PlayerTable = (props: PlayerTableProps) => {
         <thead className="playerTHead">
           <tr>
             <th className="playerTh">
-              <div className="thNickname">Apodo</div>
+              <div className="thNickname">Nickname</div>
             </th>
             <th className="playerTh">
-              <div className="thJoinTraining">Asistencia</div>
+              <div className="thJoinTraining">Going</div>
             </th>
           </tr>
         </thead>

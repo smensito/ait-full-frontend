@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import fetchTraining from "../components/listPlayers/fetchTraining";
 import { IPlayerInTraining } from "../components/listPlayers/IPlayerInTraining";
 import PlayerTable from "../components/listPlayers/PlayerTable";
-import FormatDate from "../utils/FormatDate";
+import { FormatDate } from "../utils/index";
 
 const Home = () => {
   const { data, status } = useQuery("trainings", fetchTraining);

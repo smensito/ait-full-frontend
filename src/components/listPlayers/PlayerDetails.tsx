@@ -1,4 +1,5 @@
 import { IPlayerInTraining } from "./IPlayerInTraining";
+import { Capitalize } from "../../utils/index";
 
 interface PlayerDetailsProps {
   player: IPlayerInTraining;
@@ -15,8 +16,8 @@ const PlayerDetails = (props: PlayerDetailsProps) => {
 
   return (
     <tr className="playerTr" key={player.id} style={styles.isParticipating}>
-      <td className="playerTd">{player.nickname}</td>
-      <td className="playerTd">{player.isParticipate ? "SI" : "NO"}</td>
+      <td className="playerTd">{Capitalize(player.nickname)}</td>
+      <td className="playerTd">{player.isParticipate ? "YES" : "NO"}</td>
     </tr>
   );
 };
