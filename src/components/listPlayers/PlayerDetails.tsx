@@ -1,19 +1,23 @@
-import { IPlayer } from "../../interfaces/IPlayer";
+import { IPlayerInTraining } from "./IPlayerInTraining";
 
 interface PlayerDetailsProps {
-  player: IPlayer;
+  player: IPlayerInTraining;
 }
 
 const PlayerDetails = (props: PlayerDetailsProps) => {
   const { player } = props;
+
+  const styles = {
+    isParticipating: {
+      backgroundColor: player.isParticipate ? "" : "#8c8c8c",
+    },
+  };
+
   return (
-    <li key={player.id}>
-      <div>{player.basicInfo.name}</div>
-      <div>{player.basicInfo.surname}</div>
-      <div>{player.basicInfo.nickname}</div>
-      <div>{player.basicInfo.contactInfo?.address}</div>
-      <div>{player.basicInfo.contactInfo?.phoneNumber}</div>
-    </li>
+    <tr className="playerTr" key={player.id} style={styles.isParticipating}>
+      <td className="playerTd">{player.nickname}</td>
+      <td className="playerTd">{player.isParticipate ? "SI" : "NO"}</td>
+    </tr>
   );
 };
 

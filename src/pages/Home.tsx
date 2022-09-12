@@ -1,32 +1,41 @@
-import { useEffect, useState } from "react";
-import { IPlayer } from "../interfaces/IObjects";
-import PlayerDetails from "../components/listPlayers/PlayerDetails";
+import { useQuery } from "react-query";
+import fetchTraining from "../components/listPlayers/fetchTraining";
+import { IPlayerInTraining } from "../components/listPlayers/IPlayerInTraining";
+import PlayerTable from "../components/listPlayers/PlayerTable";
+import FormatDate from "../utils/FormatDate";
 
 const Home = () => {
-  const [players, setPlayers] = useState<IPlayer[]>([]);
+  const { data, status } = useQuery("trainings", fetchTraining);
 
-  useEffect(() => {
-    const fetchPlayers = async () => {
-      const response: Response = await fetch("/v1/users/");
-      const json = await response.json();
+  if (status === "loading") {
+    return <p> Loading ... </p>;
+  }
+  if (status === "error") {
+    return <p> Error!</p>;
+  }
 
-      if (response.ok) {
-        console.log(json.results);
-        setPlayers(json.results);
-      }
-    };
-
-    fetchPlayers();
-  }, []);
+  if (status === "success") {
+  }
 
   return (
     <div className="home">
-      <h2>Rugby Players</h2>
+      <div className="row">
+        <div className="col">
+          <h2>Training day {FormatDate(data.date)}</h2>
+          <h3>
+            Number of players for the training:{" "}
+            <span className="numberPlayersTraining">
+              {
+                data.players.filter((p: IPlayerInTraining) => {
+                  return p.isParticipate;
+                }).length
+              }
+            </span>
+          </h3>
+        </div>
+      </div>
       <div className="players">
-        {players &&
-          players.map((player) => (
-            <PlayerDetails key={player.id} player={player} />
-          ))}
+        <PlayerTable players={data.players}></PlayerTable>
       </div>
     </div>
   );
