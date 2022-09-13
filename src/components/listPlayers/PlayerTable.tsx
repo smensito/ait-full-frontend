@@ -18,12 +18,15 @@ const PlayerTable = (props: PlayerTableProps) => {
           <th className="header_title">
             <div className="header_title__joining">Going</div>
           </th>
+          <th className="header_title">
+            <div className="header_title__options">Options</div>
+          </th>
         </tr>
       </thead>
       <tbody className="table__body">
         {players &&
           players.map((player) => (
-            <PlayerDetails key={player.id} player={player} />
+            <PlayerDetails key={player.nickname} player={player} />
           ))}
       </tbody>
       <tfoot></tfoot>

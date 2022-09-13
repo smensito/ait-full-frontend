@@ -7,7 +7,9 @@ const Home = () => {
 
   if (status === "loading") {
     return <p> Loading ... </p>;
-  } else if (status === "error" || !data) {
+  }
+
+  if (status === "error" || !data) {
     return <p> Error!</p>;
   }
 

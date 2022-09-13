@@ -71,10 +71,25 @@ header a {
 }
 
 .player__name,
-.player__participate {
+.player__participate,
+.player__options {
   text-align: center;
   font-size: 1.5rem;
   padding: 1.2rem;
+}
+
+.button__participate--delete {
+  background-color: rgb(179, 122, 122);
+  color: #faeed4;
+  font-size: 1.8rem;
+  border-radius: 3%;
+  padding: 1.1rem;
+}
+
+.button__participate--delete:hover {
+  cursor: pointer;
+  background-color: rgb(173, 57, 57);
+  color: white;
 }
 
 .number_players {
