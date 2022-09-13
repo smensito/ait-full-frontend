@@ -1,5 +1,8 @@
+import { IPlayerInTraining } from "./IPlayerInTraining";
+
 export interface ITraining {
   id: string;
-  players: String[];
+  players: IPlayerInTraining[];
   feedback: String;
+  date: Date;
 }

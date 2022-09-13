@@ -9,27 +9,25 @@ const PlayerTable = (props: PlayerTableProps) => {
   const { players } = props;
 
   return (
-    <>
-      <table className="playerTable">
-        <thead className="playerTHead">
-          <tr>
-            <th className="playerTh">
-              <div className="thNickname">Nickname</div>
-            </th>
-            <th className="playerTh">
-              <div className="thJoinTraining">Going</div>
-            </th>
-          </tr>
-        </thead>
-        <tbody className="playerTBody">
-          {players &&
-            players.map((player) => (
-              <PlayerDetails key={player.id} player={player} />
-            ))}
-        </tbody>
-        <tfoot></tfoot>
-      </table>
-    </>
+    <table className="table">
+      <thead className="table__header">
+        <tr>
+          <th className="header_title">
+            <div className="header_title__nickname">Nickname</div>
+          </th>
+          <th className="header_title">
+            <div className="header_title__joining">Going</div>
+          </th>
+        </tr>
+      </thead>
+      <tbody className="table__body">
+        {players &&
+          players.map((player) => (
+            <PlayerDetails key={player.id} player={player} />
+          ))}
+      </tbody>
+      <tfoot></tfoot>
+    </table>
   );
 };
 

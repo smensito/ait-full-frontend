@@ -1,21 +1,19 @@
-import { useQuery } from "react-query";
-import fetchTraining from "../components/listPlayers/fetchTraining";
-import { IPlayerInTraining } from "../components/listPlayers/IPlayerInTraining";
 import PlayerTable from "../components/listPlayers/PlayerTable";
+import useTrainingData from "../hooks/useTrainingData";
 import { FormatDate } from "../utils/index";
 
 const Home = () => {
-  const { data, status } = useQuery("trainings", fetchTraining);
+  const { data, status } = useTrainingData();
 
   if (status === "loading") {
     return <p> Loading ... </p>;
-  }
-  if (status === "error") {
+  } else if (status === "error" || !data) {
     return <p> Error!</p>;
   }
 
-  if (status === "success") {
-  }
+  const playersTraining = data.players.filter(({ isParticipate }) => {
+    return isParticipate;
+  }).length;
 
   return (
     <div className="home">
@@ -23,18 +21,12 @@ const Home = () => {
         <div className="col">
           <h2>Training day {FormatDate(data.date)}</h2>
           <h3>
-            Number of players for the training:{" "}
-            <span className="numberPlayersTraining">
-              {
-                data.players.filter((p: IPlayerInTraining) => {
-                  return p.isParticipate;
-                }).length
-              }
-            </span>
+            Number of players for the training:
+            <span className="number_players">{playersTraining}</span>
           </h3>
         </div>
       </div>
-      <div className="players">
+      <div>
         <PlayerTable players={data.players}></PlayerTable>
       </div>
     </div>

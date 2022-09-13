@@ -37,17 +37,20 @@ header a {
 }
 
 /* Player table */
-.playerTable {
+.table {
   min-width: 100%;
   border: 2px solid #202020;
   border-radius: 1%;
 }
 
-.playerTHead {
+.table__header {
+  background-color: #60bb87;
+  font-size: 1.5rem;
   border: 1px solid #202020;
+  padding-top: 1.2rem;
 }
 
-.playerTh {
+.table_body {
   color: #00923f;
   background-color: #faeed4;
   font-size: 1.5rem;
@@ -55,29 +58,26 @@ header a {
   padding: 1.2rem;
 }
 
-.playerTBody {
+.table__body {
   border: 2px solid #202020;
 }
 
-.playerTd {
+.header_title {
+  background-color: #60bb87;
+}
+
+.player:hover {
+  background-color: #60bb8785;
+}
+
+.player__name,
+.player__participate {
   text-align: center;
   font-size: 1.5rem;
   padding: 1.2rem;
 }
 
-.playerTr:hover {
-  background: #60bb87;
-}
-
-.isParticipating {
-  background: #60bb87;
-}
-
-.isNotParticipating {
-  background: #8c8c8c;
-}
-
-.numberPlayersTraining {
+.number_players {
   padding: 0 0 0 2rem;
   font-size: 3.5rem;
   color: #60bb87;

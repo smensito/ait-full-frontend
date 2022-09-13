@@ -5,7 +5,6 @@ export interface IPlayer {
   password: String;
   role: String;
   isEmailVerified: Boolean;
-  default: false;
   basicInfo: {
     name: String;
     surname: String;

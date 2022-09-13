@@ -15,9 +15,11 @@ const PlayerDetails = (props: PlayerDetailsProps) => {
   };
 
   return (
-    <tr className="playerTr" key={player.id} style={styles.isParticipating}>
-      <td className="playerTd">{Capitalize(player.nickname)}</td>
-      <td className="playerTd">{player.isParticipate ? "YES" : "NO"}</td>
+    <tr className="player" key={player.id} style={styles.isParticipating}>
+      <td className="player__name">{Capitalize(player.nickname)}</td>
+      <td className="player__participate">
+        {player.isParticipate ? "YES" : "NO"}
+      </td>
     </tr>
   );
 };
