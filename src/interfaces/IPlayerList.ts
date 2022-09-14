@@ -1,4 +1,4 @@
-export interface IPlayerList {
+export default interface IPlayerList {
   results: [
     {
       basicInfo: {

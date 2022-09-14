@@ -1,6 +1,6 @@
-import { IPlayerInTraining } from "./IPlayerInTraining";
 import { Capitalize } from "../../utils/index";
 import useDeleteParticipate from "../../hooks/useDeleteParticipate";
+import IPlayerInTraining from "../../interfaces/IPlayerInTraining";
 
 interface PlayerDetailsProps {
   player: IPlayerInTraining;

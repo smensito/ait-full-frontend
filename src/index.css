@@ -47,7 +47,7 @@ header a {
   background-color: #60bb87;
   font-size: 1.5rem;
   border: 1px solid #202020;
-  padding-top: 1.2rem;
+  height: 5rem;
 }
 
 .table_body {
@@ -63,7 +63,11 @@ header a {
 }
 
 .header_title {
+  vertical-align: middle;
+  text-align: center;
+  font-size: 1.8rem;
   background-color: #60bb87;
+  margin: 1rem 0 1rem 0;
 }
 
 .player:hover {
@@ -76,6 +80,7 @@ header a {
   text-align: center;
   font-size: 1.5rem;
   padding: 1.2rem;
+  vertical-align: middle;
 }
 
 .button__participate--delete {

@@ -1,4 +1,4 @@
-import PlayerTable from "../components/listPlayers/PlayerTable";
+import PlayerTable from "../components/training/PlayerTable";
 import useTrainingData from "../hooks/useTrainingData";
 import { FormatDate } from "../utils/index";
 

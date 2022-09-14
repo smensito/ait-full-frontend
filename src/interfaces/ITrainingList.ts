@@ -1,4 +1,4 @@
-export interface ITrainingList {
+export default interface ITrainingList {
   results: [
     {
       id: string;

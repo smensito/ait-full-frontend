@@ -1,5 +1,9 @@
 import { useQuery } from "react-query";
 
+interface DeleteParticipateProps {
+  userId: string;
+}
+
 const deleteParticipate = async (userId: string) => {
   const TRAINING_ID = "631f63f45f3d5137b1117d68";
 
@@ -10,10 +14,6 @@ const deleteParticipate = async (userId: string) => {
   );
   return await trainingResponse.json();
 };
-
-interface DeleteParticipateProps {
-  userId: string;
-}
 
 const useDeleteParticipate = (props: DeleteParticipateProps) => {
   const { userId } = props;

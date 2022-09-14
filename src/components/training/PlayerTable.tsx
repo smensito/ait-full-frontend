@@ -1,4 +1,4 @@
-import { IPlayerInTraining } from "./IPlayerInTraining";
+import IPlayerInTraining from "../../interfaces/IPlayerInTraining";
 import PlayerDetails from "./PlayerDetails";
 
 interface PlayerTableProps {

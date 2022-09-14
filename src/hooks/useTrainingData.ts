@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { ITraining } from "../components/listPlayers/ITraining";
+import ITraining from "../interfaces/ITraining";
 
 const fetchTraining = async () => {
   const TRAINING_ID = "631f63f45f3d5137b1117d68";
