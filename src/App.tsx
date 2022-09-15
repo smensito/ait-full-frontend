@@ -5,7 +5,6 @@ import Navbar from "./components/Navbar";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import "./index.css";
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const queryClient = new QueryClient();
