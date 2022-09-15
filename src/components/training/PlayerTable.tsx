@@ -1,7 +1,8 @@
 import { useState } from "react";
 
+import { Capitalize } from "../../utils/index";
+
 import IPlayerInTraining from "../../interfaces/IPlayerInTraining";
-import PlayerDetails from "./PlayerDetails";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -10,6 +11,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
+import UnsubscribeButton from "./UnsubscribeButton";
 
 interface PlayerTableProps {
   players: IPlayerInTraining[];
@@ -34,7 +36,7 @@ const PlayerTable = (props: PlayerTableProps) => {
   };
 
   interface Column {
-    id: "nickname" | "id" | "isParticipate";
+    id: "nickname" | "id" | "isParticipate" | "options";
     label: string;
   }
 
@@ -44,6 +46,7 @@ const PlayerTable = (props: PlayerTableProps) => {
       id: "isParticipate",
       label: "Asistencia",
     },
+    { id: "options", label: "Opciones" },
   ];
 
   return (
@@ -69,9 +72,12 @@ const PlayerTable = (props: PlayerTableProps) => {
                         tabIndex={-1}
                         key={player.id}
                       >
-                        <TableCell>{player.nickname}</TableCell>
+                        <TableCell>{Capitalize(player.nickname)}</TableCell>
                         <TableCell>
                           {player.isParticipate ? "YES" : "NO"}
+                        </TableCell>
+                        <TableCell className="player__options">
+                          <UnsubscribeButton player={player} />
                         </TableCell>
                       </TableRow>
                     </>
