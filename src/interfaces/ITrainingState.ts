@@ -1,10 +1,7 @@
 import IPlayerInTraining from "./IPlayerInTraining";
 
-interface ITraining {
-  id: string;
+export interface ITrainingState {
   players: IPlayerInTraining[];
-  feedback: string;
   date: Date;
+  feedback: string;
 }
-
-export default ITraining;
