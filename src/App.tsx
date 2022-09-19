@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import { QueryClient, QueryClientProvider } from "react-query";
 
 import "./index.css";
+import Register from "./pages/Register";
 
 function App() {
   const queryClient = new QueryClient();
@@ -17,6 +18,7 @@ function App() {
           <div className="pages">
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/register" element={<Register />} />
             </Routes>
           </div>
         </BrowserRouter>
