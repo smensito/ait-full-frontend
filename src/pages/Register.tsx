@@ -100,6 +100,8 @@ const Register = () => {
       });
   };
 
+  if (isError) return <h2> Error ...</h2>;
+
   if (isFetching) return <h2> Loading ...</h2>;
 
   return (
@@ -108,7 +110,7 @@ const Register = () => {
         <section>
           <h1>Success!</h1>
           <p>
-            <a href="#">Sign In</a>
+            <a href="/login">Sign In</a>
           </p>
         </section>
       ) : (
@@ -285,7 +287,7 @@ const Register = () => {
             <br />
             <span className="line">
               {/*put router link here*/}
-              <a href="#">Sign In</a>
+              <a href="/login">Sign In</a>
             </span>
           </p>
         </section>
