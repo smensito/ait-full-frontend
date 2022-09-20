@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import ITraining from "../interfaces/ITraining";
 
 const fetchTraining = async () => {
-  const TRAINING_ID = "631f63f45f3d5137b1117d68";
+  const TRAINING_ID = "632866b50b101421436f626c";
 
   // For this training loop get players
   const trainingResponse = await fetch(`/v1/trainings/` + TRAINING_ID);
