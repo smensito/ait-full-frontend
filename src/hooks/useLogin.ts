@@ -13,6 +13,7 @@ const loginUser = async (props: LoginProps) => {
     method: "POST",
     headers: {
       Accept: "application/json",
+      withCredentials: "true",
       "Content-Type": "application/json",
     },
     body: jsonBody,

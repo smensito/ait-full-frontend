@@ -1,7 +1,11 @@
-import { useRef, useState, useEffect, FormEvent } from "react";
+import { useRef, useState, useEffect, FormEvent, useContext } from "react";
+import AuthContext from "../context/AuthProvider";
 import useLogin from "../hooks/useLogin";
+import IUser from "../interfaces/IUser";
 
 const Login = () => {
+  const { setAuth } = useContext(AuthContext);
+
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
 
@@ -10,7 +14,7 @@ const Login = () => {
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const { refetch, isFetching, isError, error } = useLogin({
+  const { refetch, isFetching, isError, data } = useLogin({
     username: user,
     password: pwd,
   });
@@ -26,8 +30,30 @@ const Login = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    refetch();
-    setSuccess(true);
+    refetch()
+      .then((res) => {
+        console.log(res.data);
+        const accessToken: string = res.data?.tokens?.access;
+        const user: IUser = res.data?.user;
+        // TODO: Añadir roles!
+        setAuth(user, accessToken);
+        setSuccess(true);
+      })
+      .catch((err) => {
+        setSuccess(false);
+
+        if (!err?.response) {
+          setErrMsg("No Server Response");
+        } else if (err?.response?.status === 400) {
+          setErrMsg("Missing Username or Password");
+        } else if (err?.response?.status === 401) {
+          setErrMsg("Unauthorized");
+        } else {
+          setErrMsg("Login Failed");
+        }
+
+        errRef.current?.focus();
+      });
   };
 
   if (isError) return <h2> Error ...</h2>;

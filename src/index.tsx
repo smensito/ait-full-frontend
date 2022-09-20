@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import { TrainingProvider } from "./context/TrainingProvider";
+import { AuthProvider } from "./context/AuthProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -10,8 +11,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <TrainingProvider>
-      <App />
-    </TrainingProvider>
+    <AuthProvider>
+      <TrainingProvider>
+        <App />
+      </TrainingProvider>
+    </AuthProvider>
   </React.StrictMode>
 );
