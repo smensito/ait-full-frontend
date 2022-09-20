@@ -34,7 +34,7 @@ const Register = () => {
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const { refetch, isFetching } = useRegister({
+  const { refetch, isFetching, isError, error } = useRegister({
     username: user,
     email: email,
     password: pwd,
@@ -78,9 +78,19 @@ const Register = () => {
       return;
     }
 
-    setSuccess(true);
-
-    refetch();
+    // TODO: Comprobar que estamos accediendo al then del refetch y que se muestran los mensajes de error en caso de error
+    refetch()
+      .then(() => {
+        if (isError) {
+          setErrMsg("Error response: " + error);
+        } else {
+          setSuccess(true);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        setErrMsg("Error response: " + error);
+      });
   };
 
   if (isFetching) return <h2> Loading ...</h2>;
