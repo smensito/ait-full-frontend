@@ -9,7 +9,7 @@ import useRegister from "../hooks/useRegister";
 
 const USER_REGEX = new RegExp("^[a-z][A-z0-9-_]{3,24}$");
 const EMAIL_REGEX = new RegExp("^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$");
-const PWD_REGEX = new RegExp("^(?=.*?[A-Za-z])(?=.*?[0-9]).{6,}$");
+const PWD_REGEX = new RegExp("^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$");
 
 const Register = () => {
   const userRef = useRef<HTMLInputElement>(null);
@@ -31,6 +31,8 @@ const Register = () => {
   const [validMatch, setValidMatch] = useState(false);
   const [matchFocus, setMatchFocus] = useState(false);
 
+  const [selectedRole, setSelectedRole] = useState<string>("player");
+
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
@@ -38,6 +40,7 @@ const Register = () => {
     username: user,
     email: email,
     password: pwd,
+    role: selectedRole,
   });
 
   useEffect(() => {
@@ -65,6 +68,11 @@ const Register = () => {
   useEffect(() => {
     setErrMsg("");
   }, [user, email, pwd, matchPwd]);
+
+  const selectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    setSelectedRole(value);
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -274,6 +282,17 @@ const Register = () => {
                 Must match the first password input field.
               </p>
             </fieldset>
+
+            <div>
+              <select onChange={selectChange}>
+                <option selected disabled>
+                  Participación en el club:
+                </option>
+                <option value="player">Jugador</option>
+                <option value="assistant">Asistente</option>
+                <option value="coach">Entrenador</option>
+              </select>
+            </div>
 
             <button
               disabled={!validName || !validPwd || !validMatch ? true : false}

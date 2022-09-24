@@ -4,6 +4,7 @@ interface RegisterProps {
   username: string;
   email: string;
   password: string;
+  role: string;
 }
 
 const registerUser = async (props: RegisterProps) => {
@@ -25,11 +26,11 @@ const registerUser = async (props: RegisterProps) => {
 };
 
 const useRegister = (props: RegisterProps) => {
-  const { username, email, password } = props;
+  const { username, email, password, role } = props;
 
   return useQuery(
     ["register", username, email, password],
-    () => registerUser({ username, email, password }),
+    () => registerUser({ username, email, password, role }),
     {
       enabled: false,
     }
