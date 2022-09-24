@@ -1,10 +1,12 @@
-import { useRef, useState, useEffect, FormEvent, useContext } from "react";
-import AuthContext from "../context/AuthProvider";
+import { useRef, useState, useEffect, FormEvent } from "react";
+import useAuth from "../hooks/useAuth";
 import useLogin from "../hooks/useLogin";
+import IAccessToken from "../interfaces/ITokens";
 import IUser from "../interfaces/IUser";
+import Home from "./Home";
 
 const Login = () => {
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth } = useAuth();
 
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
@@ -14,7 +16,7 @@ const Login = () => {
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const { refetch, isFetching, isError, data } = useLogin({
+  const { refetch, isFetching, isError } = useLogin({
     username: user,
     password: pwd,
   });
@@ -32,10 +34,8 @@ const Login = () => {
 
     refetch()
       .then((res) => {
-        console.log(res.data);
-        const accessToken: string = res.data?.tokens?.access;
+        const accessToken: IAccessToken = res.data?.tokens?.access;
         const user: IUser = res.data?.user;
-        // TODO: Añadir roles!
         setAuth(user, accessToken);
         setSuccess(true);
       })
@@ -65,6 +65,7 @@ const Login = () => {
       {success ? (
         <section>
           <h1> You are logged in!</h1>
+          <Home />
         </section>
       ) : (
         <section>

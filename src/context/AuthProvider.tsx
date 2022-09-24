@@ -1,9 +1,10 @@
 import { createContext, useState } from "react";
+import IAccessToken from "../interfaces/ITokens";
 import IUser from "../interfaces/IUser";
 
 const AuthContext = createContext({
   auth: {},
-  setAuth: (user: IUser, token: string) => {},
+  setAuth: (user: IUser, token: IAccessToken) => {},
 });
 
 interface IChildrenProps {

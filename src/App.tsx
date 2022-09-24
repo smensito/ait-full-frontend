@@ -7,6 +7,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import "./index.css";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Missing from "./pages/Missing";
 
 function App() {
   const queryClient = new QueryClient();
@@ -18,9 +19,15 @@ function App() {
           <Navbar />
           <div className="pages">
             <Routes>
-              <Route path="/" element={<Home />} />
+              {/* Public Routes */}
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
+
+              {/* Protected Routes */}
+              <Route path="/" element={<Home />} />
+
+              {/* Catch all */}
+              <Route path="*" element={<Missing />} />
             </Routes>
           </div>
         </BrowserRouter>
