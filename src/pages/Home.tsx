@@ -13,6 +13,7 @@ const Home = () => {
   }
 
   if (status === "error" || !data) {
+    // TODO: Check if status is forbidden -> 403 -> then go to login page
     navigate("/login", { state: { from: location }, replace: true });
     return <p> Error!</p>;
   }
