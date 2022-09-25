@@ -1,16 +1,15 @@
 import { useQuery } from "react-query";
 import ITraining from "../interfaces/ITraining";
-
-const fetchTraining = async () => {
-  const TRAINING_ID = "632866b50b101421436f626c";
-
-  // For this training loop get players
-  const trainingResponse = await fetch(`/v1/trainings/` + TRAINING_ID);
-  return await trainingResponse.json();
-};
+import useAxiosPrivate from "./useAxiosPrivate";
 
 const useTrainingData = () => {
-  return useQuery<ITraining>("trainings", fetchTraining);
+  const TRAINING_ID = "632866b50b101421436f626c";
+
+  const axiosPrivate = useAxiosPrivate();
+
+  return useQuery(["trainings", TRAINING_ID], () =>
+    axiosPrivate.get<ITraining>("/v1/trainings/" + TRAINING_ID)
+  );
 };
 
 export default useTrainingData;

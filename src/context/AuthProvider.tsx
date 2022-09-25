@@ -4,7 +4,7 @@ import IUser from "../interfaces/IUser";
 
 interface IAuth {
   user: IUser;
-  token: IAccessToken;
+  accessToken: IAccessToken;
 }
 
 interface IAuthContext {
@@ -36,7 +36,7 @@ const defaultUser: IUser = {
 const AuthContext = createContext<IAuthContext>({
   auth: {
     user: defaultUser,
-    token: defaultToken,
+    accessToken: defaultToken,
   },
   setAuth: () => {},
 });
@@ -48,7 +48,7 @@ interface IChildrenProps {
 export const AuthProvider = ({ children }: IChildrenProps) => {
   const [auth, setAuth] = useState({
     user: defaultUser,
-    token: defaultToken,
+    accessToken: defaultToken,
   });
 
   return (

@@ -9,7 +9,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Missing from "./pages/Missing";
 import RequireAuth from "./pages/RequireAuth";
-import Unauthorized from "./components/Unautorized";
+import Unauthorized from "./components/Unauthorized";
 
 const ROLES = {
   Player: "player",

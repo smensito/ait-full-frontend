@@ -13,7 +13,7 @@ const Home = () => {
     return <p> Error!</p>;
   }
 
-  const playersTraining = data.players.filter(({ isParticipate }) => {
+  const playersTraining = data.data.players.filter(({ isParticipate }) => {
     return isParticipate;
   }).length;
 
@@ -21,7 +21,7 @@ const Home = () => {
     <div className="home">
       <div className="row">
         <div className="col">
-          <h2>Training day {FormatDate(data.date)}</h2>
+          <h2>Training day {FormatDate(data.data.date)}</h2>
           <h3>
             Number of players for the training:
             <span className="number_players">{playersTraining}</span>
@@ -29,7 +29,7 @@ const Home = () => {
         </div>
       </div>
       <div>
-        <PlayerTable players={data.players}></PlayerTable>
+        <PlayerTable players={data.data.players}></PlayerTable>
       </div>
     </div>
   );

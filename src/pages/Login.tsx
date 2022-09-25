@@ -1,22 +1,14 @@
 import { useRef, useState, useEffect, FormEvent } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useLogin from "../hooks/useLogin";
 import IAccessToken from "../interfaces/ITokens";
 import IUser from "../interfaces/IUser";
 
-interface ILocationState {
-  from: {
-    pathname: string;
-  };
-}
-
 const Login = () => {
   const { setAuth } = useAuth();
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const { from } = location.state as ILocationState;
 
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
@@ -40,7 +32,7 @@ const Login = () => {
 
   interface IAuth {
     user: IUser;
-    token: IAccessToken;
+    accessToken: IAccessToken;
   }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -51,9 +43,9 @@ const Login = () => {
         const accessToken: IAccessToken = res.data?.tokens?.access;
         const user: IUser = res.data?.user;
 
-        const authState: IAuth = { user: user, token: accessToken };
+        const authState: IAuth = { user: user, accessToken: accessToken };
         setAuth(authState);
-        navigate(from, { replace: true });
+        navigate("/", { replace: true });
       })
       .catch((err) => {
         if (!err?.response) {
