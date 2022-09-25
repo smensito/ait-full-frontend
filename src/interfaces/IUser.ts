@@ -1,18 +1,18 @@
 export default interface IUser {
   id: string;
-  username: String;
-  email: String;
-  password: String;
-  role: String;
-  isEmailVerified: Boolean;
-  basicInfo: {
-    name: String;
-    surname: String;
-    nickname: String;
+  username: string;
+  email: string;
+  password: string;
+  role: string;
+  isEmailVerified: boolean;
+  basicInfo?: {
+    name: string;
+    surname: string;
+    nickname: string;
     birthday: Date;
     contactInfo?: {
-      phoneNumber?: String;
-      address?: String;
+      phoneNumber?: string;
+      address?: string;
     };
   };
 }

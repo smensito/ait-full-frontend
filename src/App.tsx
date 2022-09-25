@@ -8,6 +8,14 @@ import "./index.css";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Missing from "./pages/Missing";
+import RequireAuth from "./pages/RequireAuth";
+import Unauthorized from "./components/Unautorized";
+
+const ROLES = {
+  Player: "player",
+  Assistant: "assistant",
+  Coach: "coach",
+};
 
 function App() {
   const queryClient = new QueryClient();
@@ -22,9 +30,18 @@ function App() {
               {/* Public Routes */}
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/unauthorized" element={<Unauthorized />} />
 
               {/* Protected Routes */}
-              <Route path="/" element={<Home />} />
+              <Route
+                element={
+                  <RequireAuth
+                    allowedRoles={[ROLES.Player, ROLES.Assistant, ROLES.Coach]}
+                  />
+                }
+              >
+                <Route path="/" element={<Home />} />
+              </Route>
 
               {/* Catch all */}
               <Route path="*" element={<Missing />} />

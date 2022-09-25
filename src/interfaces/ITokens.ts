@@ -3,16 +3,16 @@ export default interface IAccessToken {
   expires: Date;
 }
 
-interface IRefreshToken {
-  token: string;
-  expires: Date;
-}
+// interface IRefreshToken {
+//   token: string;
+//   expires: Date;
+// }
 
-interface IAccessRefreshToken {
-  access: IAccessToken;
-  refresh: IRefreshToken;
-}
+// interface IAccessRefreshToken {
+//   access: IAccessToken;
+//   refresh: IRefreshToken;
+// }
 
-export default interface ITokens {
-  tokens: IAccessRefreshToken;
-}
+// export default interface ITokens {
+//   tokens: IAccessRefreshToken;
+// }
