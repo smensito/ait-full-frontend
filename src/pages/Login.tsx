@@ -1,14 +1,25 @@
 import { useRef, useState, useEffect, FormEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useLogin from "../hooks/useLogin";
 import IAccessToken from "../interfaces/ITokens";
 import IUser from "../interfaces/IUser";
 
+interface IFrom {
+  pathname: string;
+}
+
+interface ILocationState {
+  state: { from: IFrom };
+}
+
 const Login = () => {
   const { setAuth } = useAuth();
 
   const navigate = useNavigate();
+  const location = useLocation();
+  const { state } = (location.state as ILocationState) || "/";
+  const pathname = state?.from?.pathname || "/";
 
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
@@ -45,7 +56,7 @@ const Login = () => {
 
         const authState: IAuth = { user: user, accessToken: accessToken };
         setAuth(authState);
-        navigate("/", { replace: true });
+        navigate(pathname, { replace: true });
       })
       .catch((err) => {
         if (!err?.response) {

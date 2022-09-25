@@ -1,15 +1,19 @@
+import { useLocation, useNavigate } from "react-router-dom";
 import PlayerTable from "../components/training/PlayerTable";
 import useTrainingData from "../hooks/useTrainingData";
 import { FormatDate } from "../utils/index";
 
 const Home = () => {
   const { data, status } = useTrainingData();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   if (status === "loading") {
     return <p> Loading ... </p>;
   }
 
   if (status === "error" || !data) {
+    navigate("/login", { state: { from: location }, replace: true });
     return <p> Error!</p>;
   }
 
