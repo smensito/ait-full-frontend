@@ -10,6 +10,8 @@ import Login from "./pages/Login";
 import Missing from "./pages/Missing";
 import RequireAuth from "./pages/RequireAuth";
 import Unauthorized from "./components/Unauthorized";
+import PersistLogin from "./components/PersistLogin";
+import Layout from "./components/Layout";
 
 const ROLES = {
   Player: "player",
@@ -22,33 +24,32 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="App">
-        <BrowserRouter>
-          <Navbar />
-          <div className="pages">
-            <Routes>
-              {/* Public Routes */}
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/unauthorized" element={<Unauthorized />} />
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          {/* Public Routes */}
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/unauthorized" element={<Unauthorized />} />
 
-              {/* Protected Routes */}
-              <Route
-                element={
-                  <RequireAuth
-                    allowedRoles={[ROLES.Player, ROLES.Assistant, ROLES.Coach]}
-                  />
-                }
-              >
-                <Route path="/" element={<Home />} />
-              </Route>
+          {/* Protected Routes */}
+          {/* <Route element={<PersistLogin />}> */}
+          <Route>
+            <Route
+              element={
+                <RequireAuth
+                  allowedRoles={[ROLES.Player, ROLES.Assistant, ROLES.Coach]}
+                />
+              }
+            >
+              <Route path="/home" element={<Home />} />
+            </Route>
+          </Route>
 
-              {/* Catch all */}
-              <Route path="*" element={<Missing />} />
-            </Routes>
-          </div>
-        </BrowserRouter>
-      </div>
+          {/* Catch all */}
+          <Route path="*" element={<Missing />} />
+        </Route>
+      </Routes>
     </QueryClientProvider>
   );
 }

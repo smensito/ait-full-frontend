@@ -14,12 +14,12 @@ interface ILocationState {
 }
 
 const Login = () => {
-  const { setAuth } = useAuth();
+  const { setAuth, persist, setPersist } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
   const { state } = (location.state as ILocationState) || "/";
-  const pathname = state?.from?.pathname || "/";
+  const pathname = state?.from?.pathname || "/home";
 
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
@@ -51,8 +51,8 @@ const Login = () => {
 
     refetch()
       .then((res) => {
-        const accessToken: IAccessToken = res.data?.tokens?.access;
-        const user: IUser = res.data?.user;
+        const accessToken: IAccessToken = res.data?.tokens.access!;
+        const user: IUser = res.data?.user!;
 
         const authState: IAuth = { user: user, accessToken: accessToken };
         setAuth(authState);
@@ -72,6 +72,14 @@ const Login = () => {
         errRef.current?.focus();
       });
   };
+
+  const togglePersist = () => {
+    setPersist(!persist);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("persist", JSON.stringify(persist));
+  }, [persist]);
 
   if (isError) return <h2> Error ...</h2>;
 
@@ -115,6 +123,16 @@ const Login = () => {
         </fieldset>
 
         <button>Sign In</button>
+
+        <div className="persistCheck">
+          <input
+            type="checkbox"
+            id="persist"
+            onChange={togglePersist}
+            checked={persist}
+          />
+          <label htmlFor="persist">Trust This Device</label>
+        </div>
       </form>
 
       <p>

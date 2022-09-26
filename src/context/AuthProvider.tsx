@@ -10,6 +10,8 @@ interface IAuth {
 interface IAuthContext {
   auth: IAuth;
   setAuth: (state: IAuth) => void;
+  persist: boolean;
+  setPersist: (state: boolean) => void;
 }
 
 const defaultToken: IAccessToken = {
@@ -26,19 +28,14 @@ const defaultUser: IUser = {
   role: "player",
 };
 
-// const defaultAuth: IAuthContext = {
-//   auth: {
-//     user: defaultUser,
-//     token: defaultToken,
-//   },
-// };
-
 const AuthContext = createContext<IAuthContext>({
   auth: {
     user: defaultUser,
     accessToken: defaultToken,
   },
   setAuth: () => {},
+  persist: false,
+  setPersist: () => {},
 });
 
 interface IChildrenProps {
@@ -51,8 +48,12 @@ export const AuthProvider = ({ children }: IChildrenProps) => {
     accessToken: defaultToken,
   });
 
+  const [persist, setPersist] = useState(
+    JSON.parse(localStorage.getItem("persist")!) || false
+  );
+
   return (
-    <AuthContext.Provider value={{ auth, setAuth }}>
+    <AuthContext.Provider value={{ auth, setAuth, persist, setPersist }}>
       {children}
     </AuthContext.Provider>
   );

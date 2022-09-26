@@ -7,8 +7,9 @@ const useRefreshToken = () => {
   const { setAuth } = useAuth();
 
   const refresh = async () => {
-    const response = await api.get("/refresh-tokens", {
+    const response = await api.post("/v1/auth/refresh-tokens", {
       withCredentials: true,
+      // refreshToken: auth.accessToken.token,
     });
 
     const user: IUser = response.data.user;
