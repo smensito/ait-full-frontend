@@ -25,19 +25,16 @@ interface IAuth {
 
 const axiosConfig = {
   "Access-Control-Allow-Origin": "*",
-  withCredentials: "true",
   Accept: "application/json",
   "Content-Type": "application/json",
   credentials: "include",
+  withCredentials: true,
 };
 
 const loginUser = async (props: LoginProps) => {
   const jsonBody = JSON.stringify(props);
 
-  // For this training loop get players
   const instance = axios.create({
-    withCredentials: true,
-    baseURL: "http://localhost:3001",
     headers: axiosConfig,
   });
 

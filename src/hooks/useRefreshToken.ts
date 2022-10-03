@@ -2,15 +2,25 @@ import api from "../api/api";
 import useAuth from "./useAuth";
 import IAccessToken from "../interfaces/ITokens";
 import IUser from "../interfaces/IUser";
+import axios from "axios";
+
+const axiosConfig = {
+  "Access-Control-Allow-Origin": "*",
+  Accept: "application/json",
+  "Content-Type": "application/json",
+  credentials: "include",
+  withCredentials: true,
+};
 
 const useRefreshToken = () => {
   const { setAuth } = useAuth();
 
   const refresh = async () => {
-    const response = await api.post("/v1/auth/refresh-tokens", {
-      withCredentials: true,
-      // refreshToken: auth.accessToken.token,
+    const instance = axios.create({
+      headers: axiosConfig,
     });
+
+    const response = await instance.post("/v1/auth/refresh-tokens");
 
     const user: IUser = response.data.user;
     const accessToken: IAccessToken = response.data.accessToken;

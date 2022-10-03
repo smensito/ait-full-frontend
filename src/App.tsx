@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Navbar from "./components/Navbar";
@@ -33,8 +33,8 @@ function App() {
           <Route path="/unauthorized" element={<Unauthorized />} />
 
           {/* Protected Routes */}
-          {/* <Route element={<PersistLogin />}> */}
-          <Route>
+          <Route element={<PersistLogin />}>
+            {/* <Route> */}
             <Route
               element={
                 <RequireAuth
