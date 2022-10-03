@@ -21,7 +21,7 @@ const useRefreshToken = () => {
     });
 
     const response = await instance.post("/v1/auth/refresh-tokens");
-
+    alert(JSON.stringify(response.data));
     const user: IUser = response.data.user;
     const accessToken: IAccessToken = response.data.accessToken;
 

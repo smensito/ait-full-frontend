@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import PlayerTable from "../components/training/PlayerTable";
+import useLogout from "../hooks/useLogout";
 import useTrainingData from "../hooks/useTrainingData";
 import { FormatDate } from "../utils/index";
 
@@ -7,6 +8,12 @@ const Home = () => {
   const { data, status } = useTrainingData();
   const navigate = useNavigate();
   const location = useLocation();
+  const logout = useLogout();
+
+  const signOut = async () => {
+    await logout();
+    navigate("/login");
+  };
 
   if (status === "loading") {
     return <p> Loading ... </p>;
@@ -24,6 +31,9 @@ const Home = () => {
 
   return (
     <div className="home">
+      <div className="logout">
+        <button onClick={signOut}> Logout</button>
+      </div>
       <div className="row">
         <div className="col">
           <h2>Training day {FormatDate(data.data.date)}</h2>
