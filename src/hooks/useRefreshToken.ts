@@ -1,7 +1,5 @@
-import api from "../api/api";
 import useAuth from "./useAuth";
-import IAccessToken from "../interfaces/ITokens";
-import IUser from "../interfaces/IUser";
+import { IAccessToken, IRefreshToken } from "../interfaces/ITokens";
 import axios from "axios";
 
 const axiosConfig = {
@@ -13,7 +11,7 @@ const axiosConfig = {
 };
 
 const useRefreshToken = () => {
-  const { setAuth } = useAuth();
+  const { setAuth, prevAuth } = useAuth();
 
   const refresh = async () => {
     const instance = axios.create({
@@ -21,21 +19,29 @@ const useRefreshToken = () => {
     });
 
     const response = await instance.post("/v1/auth/refresh-tokens");
-    alert(JSON.stringify(response.data));
-    const user: IUser = response.data.user;
-    const accessToken: IAccessToken = response.data.accessToken;
 
-    setAuth({ user: user, accessToken: accessToken });
+    const accessToken: IAccessToken = response.data.access.token;
+    const refreshToken: IRefreshToken = response.data.refresh.token;
 
-    /*
-    setAuth(() => {
-      console.log(JSON.stringify(prev));
-      console.log(response.data.accessToken);
-      return { user: prev.user, token: accessToken };
+    setAuth({
+      user: prevAuth.user,
+      tokens: { access: accessToken, refresh: refreshToken },
     });
-    */
 
-    return response.data.accessToken;
+    // setAuth((prev: IAuth) =>
+    //   prev
+    //     ? {
+    //         ...prev,
+    //         user: user,
+    //         accessToken: accessToken,
+    //       }
+    //     : {
+    //         user: defaultUser,
+    //         accessToken: defaultToken,
+    //       }
+    // );
+
+    return accessToken;
   };
 
   return refresh;

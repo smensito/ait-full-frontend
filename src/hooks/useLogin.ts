@@ -1,26 +1,10 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-import IAccessToken from "../interfaces/ITokens";
-import IUser from "../interfaces/IUser";
+import { IAuth } from "../interfaces/ITokens";
 
 interface LoginProps {
   username: string;
   password: string;
-}
-
-interface IRefreshToken {
-  token: string;
-  expires: Date;
-}
-
-interface ITokens {
-  access: IAccessToken;
-  refresh: IRefreshToken;
-}
-
-interface IAuth {
-  user: IUser;
-  tokens: ITokens;
 }
 
 const axiosConfig = {

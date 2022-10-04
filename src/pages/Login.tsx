@@ -2,7 +2,7 @@ import { useRef, useState, useEffect, FormEvent } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useLogin from "../hooks/useLogin";
-import IAccessToken from "../interfaces/ITokens";
+import { IAccessToken, IAuth, IRefreshToken } from "../interfaces/ITokens";
 import IUser from "../interfaces/IUser";
 
 interface IFrom {
@@ -14,7 +14,7 @@ interface ILocationState {
 }
 
 const Login = () => {
-  const { setAuth, persist, setPersist } = useAuth();
+  const { setAuth, prevAuth, persist, setPersist } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -41,21 +41,26 @@ const Login = () => {
     setErrMsg("");
   }, [user, pwd]);
 
-  interface IAuth {
-    user: IUser;
-    accessToken: IAccessToken;
-  }
-
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     refetch()
       .then((res) => {
-        const accessToken: IAccessToken = res.data?.tokens.access!;
         const user: IUser = res.data?.user!;
+        const refreshToken: IRefreshToken = res.data?.tokens.refresh!;
+        const accessToken: IAccessToken = res.data?.tokens.access!;
 
-        const authState: IAuth = { user: user, accessToken: accessToken };
+        const authState: IAuth = {
+          user: user,
+          tokens: { access: accessToken, refresh: refreshToken },
+        };
+
         setAuth(authState);
+
+        prevAuth.user = user;
+        prevAuth.tokens.access = accessToken;
+        prevAuth.tokens.refresh = refreshToken;
+
         navigate(pathname, { replace: true });
       })
       .catch((err) => {

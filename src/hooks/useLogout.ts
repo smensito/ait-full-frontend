@@ -1,8 +1,16 @@
-import axios from "../api/api";
+import axios from "axios";
 import useAuth from "./useAuth";
 
+const axiosConfig = {
+  "Access-Control-Allow-Origin": "*",
+  Accept: "application/json",
+  "Content-Type": "application/json",
+  credentials: "include",
+  withCredentials: true,
+};
+
 const useLogout = () => {
-  const { setAuth } = useAuth();
+  const { auth, setAuth } = useAuth();
 
   const logout = async () => {
     setAuth({
@@ -14,12 +22,23 @@ const useLogout = () => {
         role: "",
         isEmailVerified: false,
       },
-      accessToken: { token: "", expires: new Date(0) },
+      tokens: {
+        access: { token: "", expires: new Date(0) },
+        refresh: { token: "", expires: new Date(0) },
+      },
     });
     try {
-      const response = await axios("/logout", {
-        withCredentials: true,
+      const jsonBody = JSON.stringify(auth.tokens.refresh);
+
+      const instance = axios.create({
+        headers: axiosConfig,
       });
+
+      const response = await instance.post("/v1/auth/logout", jsonBody);
+      // const response = await axios("", {
+      //   withCredentials: true,
+      //   method: "post",
+      // });
       return response;
     } catch (err) {
       console.error(err);
