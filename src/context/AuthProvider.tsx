@@ -7,8 +7,6 @@ interface IAuthContext {
   auth: IAuth;
   setAuth: (state: IAuth) => void;
   prevAuth: IAuth;
-  persist: boolean;
-  setPersist: (state: boolean) => void;
 }
 
 const defaultTokens: ITokens = {
@@ -32,8 +30,6 @@ const AuthContext = createContext<IAuthContext>({
   },
   setAuth: () => {},
   prevAuth: { user: defaultUser, tokens: defaultTokens },
-  persist: false,
-  setPersist: () => {},
 });
 
 interface IChildrenProps {
@@ -46,19 +42,13 @@ export const AuthProvider = ({ children }: IChildrenProps) => {
     tokens: defaultTokens,
   });
 
-  const [persist, setPersist] = useState(
-    JSON.parse(localStorage.getItem("persist")!) || false
-  );
-
   const prevAuth = usePreviousAuth({
     user: defaultUser,
     tokens: defaultTokens,
   });
 
   return (
-    <AuthContext.Provider
-      value={{ auth, setAuth, prevAuth, persist, setPersist }}
-    >
+    <AuthContext.Provider value={{ auth, setAuth, prevAuth }}>
       {children}
     </AuthContext.Provider>
   );

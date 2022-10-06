@@ -2,6 +2,7 @@ import { useRef, useState, useEffect, FormEvent } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useLogin from "../hooks/useLogin";
+import useToggle from "../hooks/useToggle";
 import { IAccessToken, IAuth, IRefreshToken } from "../interfaces/ITokens";
 import IUser from "../interfaces/IUser";
 
@@ -14,7 +15,7 @@ interface ILocationState {
 }
 
 const Login = () => {
-  const { setAuth, prevAuth, persist, setPersist } = useAuth();
+  const { setAuth, prevAuth } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -27,6 +28,8 @@ const Login = () => {
   const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
+
+  const [check, toggleCheck] = useToggle("persist", false);
 
   const { refetch, isFetching, isError } = useLogin({
     username: user,
@@ -78,13 +81,13 @@ const Login = () => {
       });
   };
 
-  const togglePersist = () => {
-    setPersist(!persist);
-  };
+  // const togglePersist = () => {
+  //   setPersist(!persist);
+  // };
 
-  useEffect(() => {
-    localStorage.setItem("persist", JSON.stringify(persist));
-  }, [persist]);
+  // useEffect(() => {
+  //   localStorage.setItem("persist", JSON.stringify(persist));
+  // }, [persist]);
 
   if (isError) return <h2> Error ...</h2>;
 
@@ -133,8 +136,8 @@ const Login = () => {
           <input
             type="checkbox"
             id="persist"
-            onChange={togglePersist}
-            checked={persist}
+            onChange={toggleCheck}
+            checked={check}
           />
           <label htmlFor="persist">Trust This Device</label>
         </div>
