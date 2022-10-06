@@ -5,13 +5,17 @@ const getLocalValue = (key: string, initValue: any) => {
   if (typeof window == "undefined") return initValue;
 
   // if a value is already store
-  const localValue: string = JSON.parse(localStorage.getItem(key) || "");
-  if (localValue) return localValue;
+  try {
+    const localValue: string = JSON.parse(localStorage.getItem(key)!);
+    if (localValue) return localValue;
 
-  // return result of a function
-  if (initValue instanceof Function) return initValue();
+    // return result of a function
+    if (initValue instanceof Function) return initValue();
 
-  return initValue;
+    return initValue;
+  } catch (err) {
+    console.info(err);
+  }
 };
 
 const useLocalStorage = (key: string, initValue: any) => {

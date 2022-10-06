@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect, FormEvent } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import useInput from "../hooks/useInput";
 import useLogin from "../hooks/useLogin";
 import useToggle from "../hooks/useToggle";
 import { IAccessToken, IAuth, IRefreshToken } from "../interfaces/ITokens";
@@ -25,7 +26,7 @@ const Login = () => {
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
 
-  const [user, setUser] = useState("");
+  const [user, resetUser, userAttribs] = useInput("user", "");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
@@ -59,6 +60,8 @@ const Login = () => {
         };
 
         setAuth(authState);
+        resetUser();
+        setPwd("");
 
         prevAuth.user = user;
         prevAuth.tokens.access = accessToken;
@@ -80,14 +83,6 @@ const Login = () => {
         errRef.current?.focus();
       });
   };
-
-  // const togglePersist = () => {
-  //   setPersist(!persist);
-  // };
-
-  // useEffect(() => {
-  //   localStorage.setItem("persist", JSON.stringify(persist));
-  // }, [persist]);
 
   if (isError) return <h2> Error ...</h2>;
 
@@ -113,8 +108,7 @@ const Login = () => {
             id="username"
             ref={userRef}
             autoComplete="off"
-            onChange={(e) => setUser(e.target.value)}
-            value={user}
+            {...userAttribs}
             required
           />
         </fieldset>
