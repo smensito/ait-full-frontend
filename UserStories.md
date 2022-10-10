@@ -35,3 +35,4 @@
 35. [] Remove training from club season
 36. [] Add training to club season
 37. [] Remove training from club season
+38. [] Change MUI to Tailwind

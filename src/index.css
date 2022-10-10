@@ -1,106 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* google font */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap");
 
-/* layout */
-:root {
-  --primary: #1aac83;
-  --error: #e7195a;
-}
 body {
-  background: #f1f1f1;
   margin: 0;
   font-family: "Poppins";
-}
-header {
-  background: #fff;
-}
-header .container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 10px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-header a {
-  color: #333;
-  text-decoration: none;
-}
-.pages {
-  max-width: 1400px;
-  padding: 20px;
-  margin: 0 auto;
-}
-
-.logo {
-  color: #1b703a;
-}
-
-/* Player table */
-.table {
-  min-width: 100%;
-  border: 2px solid #202020;
-  border-radius: 1%;
-}
-
-.table__header {
-  background-color: #60bb87;
-  font-size: 1.5rem;
-  border: 1px solid #202020;
-  height: 5rem;
-}
-
-.table_body {
-  color: #00923f;
-  background-color: #faeed4;
-  font-size: 1.5rem;
-  text-align: center;
-  padding: 1.2rem;
-}
-
-.table__body {
-  border: 2px solid #202020;
-}
-
-.header_title {
-  vertical-align: middle;
-  text-align: center;
-  font-size: 1.8rem;
-  background-color: #60bb87;
-  margin: 1rem 0 1rem 0;
-}
-
-.player:hover {
-  background-color: #60bb8785;
-}
-
-.player__name,
-.player__participate,
-.player__options {
-  text-align: center;
-  font-size: 1.5rem;
-  padding: 1.2rem;
-  vertical-align: middle;
-}
-
-.button__participate--delete {
-  background-color: rgb(179, 122, 122);
-  color: #faeed4;
-  font-size: 1.8rem;
-  border-radius: 3%;
-  padding: 1.1rem;
-}
-
-.button__participate--delete:hover {
-  cursor: pointer;
-  background-color: rgb(173, 57, 57);
-  color: white;
-}
-
-.number_players {
-  padding: 0 0 0 2rem;
-  font-size: 3.5rem;
-  color: #60bb87;
 }
 
 /* REGISTER */
@@ -114,46 +21,6 @@ header a {
 
 html {
   font-family: "Nunito", sans-serif;
-  font-size: 22px;
-  color: #fff;
-}
-
-body {
-  min-height: 100vh;
-  background-color: dodgerblue;
-}
-
-.App {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 1rem 0.5rem;
-}
-
-section {
-  width: 100%;
-  max-width: 420px;
-  min-height: 400px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  flex-grow: 1;
-  padding-bottom: 1rem;
-}
-
-a,
-a:visited {
-  color: #fff;
 }
 
 input[type="text"],
@@ -162,61 +29,4 @@ input[type="password"],
 button,
 textarea {
   font-family: "Nunito", sans-serif;
-  font-size: 22px;
-  padding: 0.25rem;
-  border-radius: 0.5rem;
-}
-
-label,
-button {
-  margin-top: 1rem;
-}
-
-button {
-  padding: 0.5rem;
-}
-
-.instructions {
-  font-size: 0.75rem;
-  border-radius: 0.5rem;
-  background: #000;
-  color: #fff;
-  padding: 0.25rem;
-  position: relative;
-  bottom: -10px;
-}
-
-.instructions > svg {
-  margin-right: 0.25rem;
-}
-
-.offscreen {
-  position: absolute;
-  left: -9999px;
-}
-
-.hide {
-  display: none;
-}
-
-.valid {
-  color: limegreen;
-  margin-left: 0.25rem;
-}
-
-.invalid {
-  color: red;
-  margin-left: 0.25rem;
-}
-
-.errmsg {
-  background-color: lightpink;
-  color: firebrick;
-  font-weight: bold;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.line {
-  display: inline-block;
 }
