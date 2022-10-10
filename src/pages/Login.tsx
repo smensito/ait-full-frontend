@@ -21,7 +21,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { state } = (location.state as ILocationState) || "/";
-  const pathname = state?.from?.pathname || "/home";
+  const pathname = state?.from?.pathname || "/training";
 
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);

@@ -12,6 +12,7 @@ import RequireAuth from "./pages/RequireAuth";
 import Unauthorized from "./components/Unauthorized";
 import PersistLogin from "./components/PersistLogin";
 import Layout from "./components/Layout";
+import Training from "./pages/Training";
 
 const ROLES = {
   Player: "player",
@@ -42,7 +43,7 @@ function App() {
                 />
               }
             >
-              <Route path="/home" element={<Home />} />
+              <Route path="/training" element={<Training />} />
             </Route>
           </Route>
 
