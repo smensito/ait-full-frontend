@@ -4,6 +4,7 @@ import useAuth from "../hooks/useAuth";
 import useLogin from "../hooks/useLogin";
 import IAccessToken from "../interfaces/ITokens";
 import IUser from "../interfaces/IUser";
+import { useTranslation } from "react-i18next";
 
 interface IFrom {
   pathname: string;
@@ -15,6 +16,7 @@ interface ILocationState {
 
 const Login = () => {
   const { setAuth } = useAuth();
+  const { t } = useTranslation()
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -73,9 +75,9 @@ const Login = () => {
       });
   };
 
-  if (isError) return <h2> Error ...</h2>;
+  if (isError) return <h2> {t('common.error')}</h2>;
 
-  if (isFetching) return <h2> Loading ...</h2>;
+  if (isFetching) return <h2> {t('common.loading')}</h2>;
 
   return (
     <section>
@@ -87,11 +89,11 @@ const Login = () => {
         {" "}
         {errMsg}
       </p>
-      <h1>Sign In</h1>
+      <h1>{t('login.signIn')}</h1>
 
       <form onSubmit={handleSubmit}>
         <fieldset>
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="username">{t('login.username')}:</label>
           <input
             type="text"
             id="username"
@@ -104,7 +106,7 @@ const Login = () => {
         </fieldset>
 
         <fieldset>
-          <label htmlFor="password">Password:</label>
+          <label htmlFor="password">{t('login.password')}:</label>
           <input
             type="password"
             id="password"
@@ -114,12 +116,12 @@ const Login = () => {
           />
         </fieldset>
 
-        <button>Sign In</button>
+        <button>{t('login.signIn')}</button>
       </form>
 
       <p>
-        Need an Account? <br />
-        <a href="/register">Sign Up</a>
+        {t('login.needAccount')} <br />
+        <a href="/register">{t('login.signUp')}</a>
       </p>
     </section>
   );

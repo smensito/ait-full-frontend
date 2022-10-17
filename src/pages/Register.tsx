@@ -6,12 +6,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useRegister from "../hooks/useRegister";
+import { useTranslation } from "react-i18next";
+
 
 const USER_REGEX = new RegExp("^[a-z][A-z0-9-_]{3,24}$");
 const EMAIL_REGEX = new RegExp("^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]$");
 const PWD_REGEX = new RegExp("^(?=.*?[A-Za-z])(?=.*?[0-9]).{8,}$");
 
 const Register = () => {
+  const { t } = useTranslation()
+
   const userRef = useRef<HTMLInputElement>(null);
   const errRef = useRef<HTMLParagraphElement>(null);
 
@@ -108,9 +112,9 @@ const Register = () => {
       });
   };
 
-  if (isError) return <h2> Error ...</h2>;
+  if (isError) return <h2>{t('common.error')}</h2>;
 
-  if (isFetching) return <h2> Loading ...</h2>;
+  if (isFetching) return <h2>{t('common.loading')}</h2>;
 
   return (
     <>
@@ -131,12 +135,12 @@ const Register = () => {
             {errMsg}
           </p>
 
-          <h1>Register</h1>
+          <h1>{t('register.register')}</h1>
 
           <form onSubmit={handleSubmit}>
             <fieldset>
               <label htmlFor="username">
-                Username:
+                {t('login.username')}:
                 <span className={validName ? "valid" : "hide"}>
                   <FontAwesomeIcon icon={faCheck} />
                 </span>
@@ -164,15 +168,13 @@ const Register = () => {
                 }
               >
                 <FontAwesomeIcon icon={faInfoCircle} />
-                4 to 24 characters. <br />
-                Must begin with a letter. <br />
-                Letter, numbers, underscores, hyphens allowed.
+                <em dangerouslySetInnerHTML={{ __html: t('register.usernameNote') }} />
               </p>
             </fieldset>
 
             <fieldset>
               <label htmlFor="email">
-                Email:
+                {t('register.email')}:
                 <span className={validEmail ? "valid" : "hide"}>
                   <FontAwesomeIcon icon={faCheck} />
                 </span>
@@ -201,13 +203,13 @@ const Register = () => {
                 }
               >
                 <FontAwesomeIcon icon={faInfoCircle} />
-                Must be email format.
+                {t('register.emailNote')}
               </p>
             </fieldset>
 
             <fieldset>
               <label htmlFor="password">
-                Password:
+                {t('login.password')}:
                 <FontAwesomeIcon
                   icon={faCheck}
                   className={validPwd ? "valid" : "hide"}
@@ -234,23 +236,13 @@ const Register = () => {
                 className={pwdFocus && !validPwd ? "instructions" : "offscreen"}
               >
                 <FontAwesomeIcon icon={faInfoCircle} />
-                8 to 24 characters.
-                <br />
-                Must include uppercase and lowercase letters, a number and a
-                special character.
-                <br />
-                Allowed special characters:{" "}
-                <span aria-label="exclamation mark">!</span>{" "}
-                <span aria-label="at symbol">@</span>{" "}
-                <span aria-label="hashtag">#</span>{" "}
-                <span aria-label="dollar sign">$</span>{" "}
-                <span aria-label="percent">%</span>
+                <em dangerouslySetInnerHTML={{ __html: t('register.passwordNote') }} />
               </p>
             </fieldset>
 
             <fieldset>
               <label htmlFor="confirm_pwd">
-                Confirm Password:
+                {t('register.confirmPassword')}:
                 <FontAwesomeIcon
                   icon={faCheck}
                   className={validMatch && matchPwd ? "valid" : "hide"}
@@ -279,34 +271,34 @@ const Register = () => {
                 }
               >
                 <FontAwesomeIcon icon={faInfoCircle} />
-                Must match the first password input field.
+                {t('register.mustMatch')}
               </p>
             </fieldset>
 
             <div>
               <select onChange={selectChange}>
                 <option selected disabled>
-                  Participación en el club:
+                  {t('register.dropdownDefaultValue')}
                 </option>
-                <option value="player">Jugador</option>
-                <option value="assistant">Asistente</option>
-                <option value="coach">Entrenador</option>
+                <option value="player">{t('common.roles.player')}</option>
+                <option value="assistant">{t('common.roles.staff')}</option>
+                <option value="coach">{t('common.roles.coach')}</option>
               </select>
             </div>
 
             <button
               disabled={!validName || !validPwd || !validMatch ? true : false}
             >
-              Sign Up
+              {t('login.signUp')}
             </button>
           </form>
 
           <p>
-            Already registered?
+            {t('register.registered')}
             <br />
             <span className="line">
               {/*put router link here*/}
-              <a href="/login">Sign In</a>
+              <a href="/login">{t('login.signIn')}</a>
             </span>
           </p>
         </section>
