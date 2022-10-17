@@ -6,10 +6,10 @@ import { useTranslation } from "react-i18next";
 
 
 const Home = () => {
+  const { t } = useTranslation();
   const { data, status } = useTrainingData();
   const navigate = useNavigate();
   const location = useLocation();
-  const { t } = useTranslation();
 
 
   if (status === "loading") {

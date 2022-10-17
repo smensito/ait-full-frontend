@@ -14,10 +14,17 @@ i18n
 						loading: "Cargando . . .",
 						error: "Error",
 						success: "Éxito",
+						goBack: "Volver",
+						remove: "Quitar",
+						fetching: "Obteniendo . . .",
 						roles: {
 							player: "Jugador",
 							staff: "Asistente",
 							coach: "Entrenador"
+						},
+						unauthorized: {
+							unauthorized: "No Autorizado",
+							noAccess: "No tienes acceso para la pagina solcitada."
 						}
 					},
 					home: {
@@ -56,10 +63,17 @@ i18n
 						loading: "Loading . . .",
 						error: "Error",
 						success: "Success",
+						goBack: "Go Back",
+						remove: "Remove",
+						fetching: "Fetching . . .",
 						roles: {
 							player: "Player",
 							staff: "Staff",
 							coach: "Coach"
+						},
+						unauthorized: {
+							unauthorized: "Unauthorized",
+							noAccess: "You do not have access to the requested page."
 						}
 					},
 					home: {

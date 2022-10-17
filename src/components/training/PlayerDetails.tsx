@@ -6,16 +6,19 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 
+import { useTranslation } from "react-i18next";
+
 interface PlayerDetailsProps {
   player: IPlayerInTraining;
 }
 
 const PlayerDetails = (props: PlayerDetailsProps) => {
+  const { t } = useTranslation()
   const { player } = props;
   const userId = player.userId;
   const { refetch, isFetching } = useDeleteParticipate({ userId });
 
-  if (isFetching) return <h2> Loading ...</h2>;
+  if (isFetching) return <h2>{t('common.loading')}</h2>;
   const styles = {
     isParticipating: {
       backgroundColor: player.isParticipate ? "" : "#8c8c8c",
@@ -33,7 +36,7 @@ const PlayerDetails = (props: PlayerDetailsProps) => {
             refetch();
           }}
         >
-          Remove
+          {t('common.remove')}
         </Button>
       </TableCell>
 

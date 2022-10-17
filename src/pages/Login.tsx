@@ -15,8 +15,8 @@ interface ILocationState {
 }
 
 const Login = () => {
-  const { setAuth } = useAuth();
   const { t } = useTranslation()
+  const { setAuth } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
