@@ -2,10 +2,6 @@ import { Capitalize } from "../../utils/index";
 import useDeleteParticipate from "../../hooks/useDeleteParticipate";
 import IPlayerInTraining from "../../interfaces/IPlayerInTraining";
 
-import TableRow from "@mui/material/TableRow";
-import TableCell from "@mui/material/TableRow";
-import Button from "@mui/material/Button";
-
 interface PlayerDetailsProps {
   player: IPlayerInTraining;
 }
@@ -24,18 +20,18 @@ const PlayerDetails = (props: PlayerDetailsProps) => {
 
   return (
     <>
-      <TableCell>{Capitalize(player.nickname)}</TableCell>
-      <TableCell>{player.isParticipate ? "YES" : "NO"}</TableCell>
-      <TableCell className="player__options">
-        <Button
+      <td>{Capitalize(player.nickname)}</td>
+      <td>{player.isParticipate ? "YES" : "NO"}</td>
+      <td className="player__options">
+        <button
           className="button__participate--delete"
           onClick={() => {
             refetch();
           }}
         >
           Remove
-        </Button>
-      </TableCell>
+        </button>
+      </td>
 
       <tr className="player" key={player.id} style={styles.isParticipating}>
         <td className="player__name">{Capitalize(player.nickname)}</td>

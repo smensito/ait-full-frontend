@@ -8,10 +8,21 @@ const useAxiosPrivate = () => {
   const { auth } = useAuth();
 
   useEffect(() => {
+    //request interceptor to add the auth token header to requests
     const requestIntercept = axiosPrivate.interceptors.request.use(
       (config) => {
         if (!config.headers?.Authorization) {
-          config.headers!.Authorization = `Bearer ${auth?.accessToken.token}`;
+          // if (prevAuth.tokens.refresh.token !== "") {
+          //   const refreshToken = prevAuth.tokens.refresh.token;
+          //   alert(refreshToken);
+          //   config.headers!.Authorization = `Bearer ${refreshToken}`;
+          // } else {
+
+          if (auth.tokens.access.token) {
+            config.headers!.Authorization = `Bearer ${auth?.tokens?.access?.token}`;
+          } else {
+            config.headers!.Authorization = `Bearer ${auth?.tokens?.access}`;
+          }
         }
         return config;
       },

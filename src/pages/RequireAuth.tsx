@@ -6,15 +6,17 @@ interface RequireAuthProps {
 }
 
 const RequireAuth = (props: RequireAuthProps) => {
-  const { auth } = useAuth();
   const { allowedRoles } = props;
+  const { auth } = useAuth();
+
   const location = useLocation();
-  const role = auth.user.role;
+
+  const role = auth.user?.role;
 
   return allowedRoles?.includes(role) ? (
     <Outlet />
-  ) : auth?.user ? (
-    <Navigate to="/unauthorized" />
+  ) : auth?.tokens.access ? ( //changed from user to accessToken to persist login after refresh
+    <Navigate to="/unauthorized" state={{ from: location }} replace />
   ) : (
     <Navigate to="/login" state={{ from: location }} replace />
   );

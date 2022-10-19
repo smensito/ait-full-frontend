@@ -1,20 +1,17 @@
 import { createContext, useState } from "react";
-import IAccessToken from "../interfaces/ITokens";
+import usePreviousAuth from "../hooks/usePreviousAuth";
+import { IAuth, ITokens } from "../interfaces/ITokens";
 import IUser from "../interfaces/IUser";
-
-interface IAuth {
-  user: IUser;
-  accessToken: IAccessToken;
-}
 
 interface IAuthContext {
   auth: IAuth;
   setAuth: (state: IAuth) => void;
+  prevAuth: IAuth;
 }
 
-const defaultToken: IAccessToken = {
-  token: "",
-  expires: new Date(),
+const defaultTokens: ITokens = {
+  access: { token: "", expires: new Date() },
+  refresh: { token: "", expires: new Date() },
 };
 
 const defaultUser: IUser = {
@@ -26,19 +23,13 @@ const defaultUser: IUser = {
   role: "player",
 };
 
-// const defaultAuth: IAuthContext = {
-//   auth: {
-//     user: defaultUser,
-//     token: defaultToken,
-//   },
-// };
-
 const AuthContext = createContext<IAuthContext>({
   auth: {
     user: defaultUser,
-    accessToken: defaultToken,
+    tokens: defaultTokens,
   },
   setAuth: () => {},
+  prevAuth: { user: defaultUser, tokens: defaultTokens },
 });
 
 interface IChildrenProps {
@@ -48,11 +39,16 @@ interface IChildrenProps {
 export const AuthProvider = ({ children }: IChildrenProps) => {
   const [auth, setAuth] = useState({
     user: defaultUser,
-    accessToken: defaultToken,
+    tokens: defaultTokens,
+  });
+
+  const prevAuth = usePreviousAuth({
+    user: defaultUser,
+    tokens: defaultTokens,
   });
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth }}>
+    <AuthContext.Provider value={{ auth, setAuth, prevAuth }}>
       {children}
     </AuthContext.Provider>
   );
