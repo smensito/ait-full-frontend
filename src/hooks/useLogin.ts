@@ -1,30 +1,35 @@
+import axios from "axios";
 import { useQuery } from "react-query";
+import { IAuth } from "../interfaces/ITokens";
 
 interface LoginProps {
   username: string;
   password: string;
 }
 
+const axiosConfig = {
+  "Access-Control-Allow-Origin": "*",
+  Accept: "application/json",
+  "Content-Type": "application/json",
+  credentials: "include",
+  withCredentials: true,
+};
+
 const loginUser = async (props: LoginProps) => {
   const jsonBody = JSON.stringify(props);
 
-  // For this training loop get players
-  const trainingResponse = await fetch(`http://localhost:3001/v1/auth/login/`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      withCredentials: "true",
-      "Content-Type": "application/json",
-    },
-    body: jsonBody,
+  const instance = axios.create({
+    headers: axiosConfig,
   });
-  return await trainingResponse.json();
+
+  const trainingResponse = await instance.post("/v1/auth/login", jsonBody);
+  return trainingResponse.data;
 };
 
 const useLogin = (props: LoginProps) => {
   const { username, password } = props;
 
-  return useQuery(
+  return useQuery<IAuth>(
     ["login", username, password],
     () => loginUser({ username, password }),
     {

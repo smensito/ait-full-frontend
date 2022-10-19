@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import useDeleteParticipate from "../../hooks/useDeleteParticipate";
 import IPlayerInTraining from "../../interfaces/IPlayerInTraining";
 import { useTranslation } from "react-i18next";
@@ -17,14 +16,14 @@ const UnsubscribeButton = (props: UnsubscribeButtonProps) => {
   }
 
   return (
-    <Button
+    <button
       className="button__participate--delete"
       onClick={() => {
         refetch();
       }}
     >
       {t('common.remove')}
-    </Button>
+    </button>
   );
 };
 export default UnsubscribeButton;
