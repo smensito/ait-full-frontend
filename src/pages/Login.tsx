@@ -6,6 +6,7 @@ import useLogin from "../hooks/useLogin";
 import useToggle from "../hooks/useToggle";
 import { IAccessToken, IAuth, IRefreshToken } from "../interfaces/ITokens";
 import IUser from "../interfaces/IUser";
+import { useTranslation } from "react-i18next";
 
 interface IFrom {
   pathname: string;
@@ -16,6 +17,7 @@ interface ILocationState {
 }
 
 const Login = () => {
+  const { t } = useTranslation()
   const { setAuth, prevAuth } = useAuth();
 
   const navigate = useNavigate();
@@ -83,9 +85,9 @@ const Login = () => {
       });
   };
 
-  if (isError) return <h2> Error ...</h2>;
+  if (isError) return <h2> {t('common.error')}</h2>;
 
-  if (isFetching) return <h2> Loading ...</h2>;
+  if (isFetching) return <h2> {t('common.loading')}</h2>;
 
   return (
     <section className="w-auto  p-10 bg-gradient-to-b from-green-800 via-emerald-600 to-green-500  rounded">
@@ -97,12 +99,11 @@ const Login = () => {
         {" "}
         {errMsg}
       </p>
-      <h1 className="text-3xl pb-4 text-green-50 font-medium">Sign In</h1>
-
+      <h1 className="text-3xl pb-4 text-green-50 font-medium">{t('login.signIn')}</h1>
       <form onSubmit={handleSubmit} className="py-10">
         <fieldset className="flex justify-between py-2">
           <label htmlFor="username" className="text-green-50 font-medium">
-            Username:
+            {t('login.username')}:
           </label>
           <input
             type="text"
@@ -117,7 +118,7 @@ const Login = () => {
 
         <fieldset className="flex justify-between  py-2">
           <label htmlFor="password" className="text-green-50 font-medium">
-            Password:
+            {t('login.password')}:
           </label>
           <input
             type="password"
@@ -146,17 +147,17 @@ const Login = () => {
           type="submit"
           className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 border border-green-700 rounded"
         >
-          Sign In
+          {t('login.signIn')}
         </button>
       </form>
 
       <p className="text-green-50 font-medium">
-        Need an Account? <br />
+        {t('login.needAccount')} <br />
         <a
           href="/register"
           className="text-green-50 hover:text-green-300 hover:text-base background-transparent font-bold uppercase  py-1 text-xs outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         >
-          Sign Up
+          {t('login.signUp')}
         </a>
       </p>
     </section>
